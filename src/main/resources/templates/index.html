@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <meta charset="UTF-8">
+    <title>Eventos APP</title>
+</head>
+<body class="container">
+    <h2>Lista Eventos</h2>
+    <h3><a href="/cadastrarEvento" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar Evento</a></h3>
+
+    <table class="container">
+
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Local</th>
+                <th>Data</th>
+                <th>Horário</th>
+            </tr>
+        </thead>
+        <tbody>    
+            <tr th:each="evento : ${eventos}">
+				<td><a th:href="${(#mvc.url('EC#detalhesEvento').arg(0, evento.nome)).build()}"><span th:text="${evento.nome}"></span></a></td>
+                <td><span th:text="${evento.local}"></span></td>
+                <td><span th:text="${evento.data}"></span></td>
+                <td><span th:text="${evento.horario}"></span></td>
+                <td><a class="waves-effect waves-teal btn-flat" th:href="${(#mvc.url('EC#deletarEvento').arg(0, evento.nome)).build()}"><i class="material-icons">cancel</i></a></td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>

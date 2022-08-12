@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <meta charset="UTF-8">
+    <title>Eventos APP</title>
+</head>
+<body class="container">
+    <h2>Evento</h2>
+    <h3><a href="/" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></h3>
+
+    <div th:each="evento : ${evento}" style="padding-bottom: 50px;">
+        <div class="row">
+            <p>Nome: <span th:text="${evento.nome}"></span></p>
+            <p>Local: <span th:text="${evento.local}"></span></p>
+            <p>Data: <span th:text="${evento.data}"></span></p>
+            <p>Horário: <span th:text="${evento.horario}"></span></p>
+        </div>
+        <div class="container">
+            <h5>Lista de Convidados:</h5>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>RG</th>
+                    </tr>
+                </thead>
+        
+                <tbody >
+                    <tr th:each="convidado : ${convidados}">
+                        <td><span th:text="${convidado.nomeConvidado}"></span></td>
+                        <td><span th:text="${convidado.rg}"></span></td>
+                        <td><a class="waves-effect waves-teal btn-flat" th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidado.rg)).build()}"><i class="material-icons">cancel</i></a></td>
+                    </tr>
+                </tbody>            
+            </table>
+            <form class="container" method="post" style="padding-top: 20px;">
+                Nome: <input placeholder="Nome Completo" type="text" value="" name="nomeConvidado"/>
+                RG: <input placeholder="xx.xxx.xxx-xx" type="text" value="" name="rg"/>
+                <button class="waves-effect waves-light btn" type="submit">Adicionar</button>
+            </form>
+        </div>
+    </div> 
+
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+    
+</body>
+</html>
